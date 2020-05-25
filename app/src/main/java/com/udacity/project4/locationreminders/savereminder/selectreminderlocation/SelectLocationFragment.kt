@@ -50,20 +50,9 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
         val mapFragment = childFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-
-
-
-//        TODO: add the map setup implementation
-//        TODO: zoom to the user location after taking his permission
-//        TODO: add style to the map
-//        TODO: put a marker to location that the user selected
-
-
-//        TODO: call this function after the user confirms on the selected location
-
-
         return binding.root
     }
+
     private fun setPoiClick(map: GoogleMap) {
         map.setOnPoiClickListener { poi ->
             val poiMarker = map.addMarker(
@@ -98,13 +87,12 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        // TODO: Change the map type based on the user's selection.
         R.id.normal_map -> {
             map.mapType = GoogleMap.MAP_TYPE_NORMAL
             true
         }
         R.id.hybrid_map -> {
-             map.mapType = GoogleMap.MAP_TYPE_HYBRID
+            map.mapType = GoogleMap.MAP_TYPE_HYBRID
             true
         }
         R.id.satellite_map -> {
@@ -120,26 +108,27 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
 
     override fun onMapReady(p0: GoogleMap) {
 
-            map = p0
+        map = p0
         val home = LatLng(53.355522, -6.257367)
         val zoomlevel = 18f
         map.addMarker(MarkerOptions().position(home).title("Marker in Dublin"))
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(home,zoomlevel))
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(home, zoomlevel))
         setMapStyle(map)
         setPoiClick(map)
         enableMyLocation()
     }
-    private fun isPermissionGranted() : Boolean {
+
+    private fun isPermissionGranted(): Boolean {
         return ContextCompat.checkSelfPermission(
             context!!,
             Manifest.permission.ACCESS_FINE_LOCATION
         ) == PackageManager.PERMISSION_GRANTED
     }
+
     private fun enableMyLocation() {
         if (isPermissionGranted()) {
             map.isMyLocationEnabled = true
-        }
-        else {
+        } else {
             ActivityCompat.requestPermissions(
                 context as Activity,
                 arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
@@ -147,10 +136,12 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
             )
         }
     }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
-        grantResults: IntArray) {
+        grantResults: IntArray
+    ) {
         // Check if location permissions are granted and if so enable the
         // location data layer.
         if (requestCode == REQUEST_LOCATION_PERMISSION) {
@@ -159,6 +150,7 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
             }
         }
     }
+
     private fun setMapStyle(map: GoogleMap) {
         try {
             // Customize the styling of the base map using a JSON object defined

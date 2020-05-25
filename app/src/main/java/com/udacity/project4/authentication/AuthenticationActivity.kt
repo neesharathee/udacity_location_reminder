@@ -6,15 +6,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentActivity
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.AuthUI.IdpConfig.EmailBuilder
 import com.firebase.ui.auth.AuthUI.IdpConfig.GoogleBuilder
 import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.IdpResponse
-import com.firebase.ui.auth.KickoffActivity.createIntent
-import com.firebase.ui.auth.ui.credentials.CredentialSaveActivity.createIntent
-import com.firebase.ui.auth.ui.email.EmailActivity.createIntent
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.udacity.project4.R
 import com.udacity.project4.locationreminders.RemindersActivity
@@ -37,7 +34,7 @@ class AuthenticationActivity : AppCompatActivity() {
         val auth = FirebaseAuth.getInstance()
         login.setOnClickListener(View.OnClickListener {
             if (auth.currentUser != null) {
-                val intent = Intent(this@AuthenticationActivity,RemindersActivity::class.java);
+                val intent = Intent(this@AuthenticationActivity, RemindersActivity::class.java);
                 startActivity(intent);
             } else {
                 startActivityForResult(
@@ -54,17 +51,8 @@ class AuthenticationActivity : AppCompatActivity() {
                 )
             }
         })
-
-
-
-//         TODO: Implement the create account and sign in using FirebaseUI, use sign in using email and sign in using Google
-
-//          TODO: If the user was authenticated, send him to RemindersActivity
-
-//          TODO: a bonus is to customize the sign in flow to look nice using :
-        //https://github.com/firebase/FirebaseUI-Android/blob/master/auth/README.md#custom-layout
-
     }
+
     override fun onActivityResult(
         requestCode: Int,
         resultCode: Int,
@@ -77,21 +65,33 @@ class AuthenticationActivity : AppCompatActivity() {
 
             // Successfully signed in
             if (resultCode == Activity.RESULT_OK) {
-                val intent = Intent(this@AuthenticationActivity,RemindersActivity::class.java);
+                val intent = Intent(this@AuthenticationActivity, RemindersActivity::class.java);
                 startActivity(intent);
                 finish()
             } else {
                 // Sign in failed
                 if (response == null) {
                     // User pressed back button
-                    //showSnackbar(R.string.sign_in_cancelled)
+                    Snackbar.make(
+                        findViewById(android.R.id.content),
+                        R.string.sign_in_cancelled,
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                     return
                 }
                 if (response.error!!.errorCode == ErrorCodes.NO_NETWORK) {
-                   // showSnackbar(R.string.no_internet_connection)
+                    Snackbar.make(
+                        findViewById(android.R.id.content),
+                        R.string.no_internet_connection,
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                     return
                 }
-                //showSnackbar(R.string.unknown_error)
+                Snackbar.make(
+                    findViewById(android.R.id.content),
+                    R.string.unknown_error,
+                    Snackbar.LENGTH_SHORT
+                ).show()
                 Log.e(TAG, "Sign-in error: ", response.error)
             }
         }

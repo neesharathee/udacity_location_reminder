@@ -82,9 +82,8 @@ class ReminderListFragment : BaseFragment() {
                             val intent =
                                 Intent(activity, AuthenticationActivity::class.java)
                             startActivity(intent)
-                         }
+                        }
                 }
-//                TODO: add the logout implementation
             }
         }
         return super.onOptionsItemSelected(item)

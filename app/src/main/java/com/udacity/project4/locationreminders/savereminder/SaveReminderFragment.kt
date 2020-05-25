@@ -48,11 +48,11 @@ class SaveReminderFragment : BaseFragment() {
             val location = _viewModel.reminderSelectedLocationStr.value
             val latitude = _viewModel.latitude.value
             val longitude = _viewModel.longitude.value
-            reminderData = ReminderDataItem(title,description,location,latitude,longitude)
+            reminderData = ReminderDataItem(title, description, location, latitude, longitude)
 
 //            TODO: use the user entered reminder details to:
 //             1) add a geofencing request
-//             2) save the reminder to the local db
+
             _viewModel.validateAndSaveReminder(reminderData)
             _viewModel.navigationCommand.value =
                 NavigationCommand.To(SaveReminderFragmentDirections.actionSaveReminderFragmentToReminderListFragment())
