@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingEvent
+import com.udacity.project4.locationreminders.geofence.GeofenceTransitionsJobIntentService.Companion.enqueueWork
 import com.udacity.project4.utils.sendNotification
 
 /**
@@ -36,8 +37,8 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
         val transitionType = geofencingEvent.geofenceTransition
 
         when (transitionType) {
-            // TODO: code to sendNotification to show the captured geofence evnet
             Geofence.GEOFENCE_TRANSITION_ENTER -> {
+                enqueueWork(context, intent)
                 Toast.makeText(context, "GEOFENCE_TRANSITION_ENTER", Toast.LENGTH_SHORT).show()
             }
             Geofence.GEOFENCE_TRANSITION_DWELL -> {
