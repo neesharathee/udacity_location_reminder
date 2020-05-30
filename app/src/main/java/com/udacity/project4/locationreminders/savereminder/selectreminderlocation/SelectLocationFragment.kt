@@ -70,13 +70,16 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
         //         send back the selected location details to the view model
         //         and navigate back to the previous fragment to save the reminder and add the geofence
         val lat = poiMarker.position.latitude;
+        //Log.d("LAT",lat.toString())
         val lng = poiMarker.position.longitude;
+        //Log.d("LNG",lng.toString())
+
         val locate = poiMarker.title;
         binding.viewModel?.latitude?.value = lat;
         binding.viewModel?.longitude?.value = lng;
         binding.viewModel?.reminderSelectedLocationStr?.value = locate;
-        _viewModel.navigationCommand.value =
-            NavigationCommand.To(SelectLocationFragmentDirections.actionSelectLocationFragmentToSaveReminderFragment())
+       // _viewModel.navigationCommand.value =
+           // NavigationCommand.To(SelectLocationFragmentDirections.actionSelectLocationFragmentToSaveReminderFragment())
 
     }
 
