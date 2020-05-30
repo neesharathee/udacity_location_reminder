@@ -109,9 +109,9 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
     override fun onMapReady(p0: GoogleMap) {
 
         map = p0
-        val home = LatLng(53.355522, -6.257367)
+        val home = LatLng(27.383730, 79.572330)
         val zoomlevel = 18f
-        map.addMarker(MarkerOptions().position(home).title("Marker in Dublin"))
+        map.addMarker(MarkerOptions().position(home).title("Marker in Farrukhabad"))
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(home, zoomlevel))
         setMapStyle(map)
         setPoiClick(map)
