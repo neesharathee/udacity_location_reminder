@@ -71,14 +71,14 @@ class SaveReminderFragment : BaseFragment() {
             reminderData =
                 ReminderDataItem(title, description, location, latitude, longitude, geofenceId)
 
-//             use the user entered reminder details to:
-//             1) add a geofencing request
-            addGeofence(LatLng(latitude!!, longitude!!), GEOFENCE_RADIUS, geofenceId)
 
             _viewModel.validateAndSaveReminder(reminderData)
             _viewModel.navigationCommand.value =
                 NavigationCommand.To(SaveReminderFragmentDirections.actionSaveReminderFragmentToReminderListFragment())
 
+         //   use the user entered reminder details to:
+//             1) add a geofencing request
+            addGeofence(LatLng(latitude!!, longitude!!), GEOFENCE_RADIUS, geofenceId)
         }
     }
 
