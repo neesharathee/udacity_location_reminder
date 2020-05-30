@@ -22,7 +22,7 @@ class GeofenceHelper(base: Context?) :
     }
 
     fun getGeofence(
-        ID: String?,
+        ID: String,
         latLng: LatLng,
         radius: Float,
         transitionTypes: Int

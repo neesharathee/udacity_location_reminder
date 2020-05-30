@@ -71,7 +71,7 @@ class SaveReminderFragment : BaseFragment() {
             reminderData =
                 ReminderDataItem(title, description, location, latitude, longitude, geofenceId)
 
-//            TODO: use the user entered reminder details to:
+//             use the user entered reminder details to:
 //             1) add a geofencing request
             addGeofence(LatLng(latitude!!, longitude!!), GEOFENCE_RADIUS, geofenceId)
 
