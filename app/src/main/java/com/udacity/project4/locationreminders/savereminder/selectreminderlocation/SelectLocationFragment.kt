@@ -16,13 +16,11 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.udacity.project4.R
 import com.udacity.project4.base.BaseFragment
-import com.udacity.project4.base.NavigationCommand
 import com.udacity.project4.databinding.FragmentSelectLocationBinding
 import com.udacity.project4.locationreminders.savereminder.SaveReminderViewModel
 import com.udacity.project4.utils.setDisplayHomeAsUpEnabled
@@ -35,6 +33,7 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
     private lateinit var binding: FragmentSelectLocationBinding
     private lateinit var map: GoogleMap
     private val REQUEST_LOCATION_PERMISSION = 1
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -50,6 +49,8 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
         val mapFragment = childFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+       // locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE)!!;
+       // locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         return binding.root
     }
 
@@ -70,9 +71,9 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
         //         send back the selected location details to the view model
         //         and navigate back to the previous fragment to save the reminder and add the geofence
         val lat = poiMarker.position.latitude;
-        //Log.d("LAT",lat.toString())
+
         val lng = poiMarker.position.longitude;
-        //Log.d("LNG",lng.toString())
+
 
         val locate = poiMarker.title;
         binding.viewModel?.latitude?.value = lat;
@@ -112,13 +113,10 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
     override fun onMapReady(p0: GoogleMap) {
 
         map = p0
-        val home = LatLng(27.383730, 79.572330)
-        val zoomlevel = 18f
-        map.addMarker(MarkerOptions().position(home).title("Marker in Farrukhabad"))
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(home, zoomlevel))
         setMapStyle(map)
         setPoiClick(map)
         enableMyLocation()
+
     }
 
     private fun isPermissionGranted(): Boolean {
@@ -131,6 +129,7 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
     private fun enableMyLocation() {
         if (isPermissionGranted()) {
             map.isMyLocationEnabled = true
+            map.moveCamera(CameraUpdateFactory.zoomIn())
         } else {
             ActivityCompat.requestPermissions(
                 context as Activity,
@@ -172,5 +171,4 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
             Log.e(TAG, "Can't find style. Error: ", e)
         }
     }
-
 }
