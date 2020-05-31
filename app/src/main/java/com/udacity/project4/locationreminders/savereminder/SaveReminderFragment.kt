@@ -79,7 +79,8 @@ class SaveReminderFragment : BaseFragment() {
 
          //   use the user entered reminder details to:
 //             1) add a geofencing request
-            addGeofence(LatLng(latitude!!, longitude!!), GEOFENCE_RADIUS, geofenceId)
+            if (latitude != null && longitude != null)
+                addGeofence(LatLng(latitude, longitude), GEOFENCE_RADIUS, geofenceId)
         }
     }
 
