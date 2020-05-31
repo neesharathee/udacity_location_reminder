@@ -52,13 +52,14 @@ class SaveReminderFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         binding.lifecycleOwner = this
+        geofencingClient = LocationServices.getGeofencingClient(context!!)
+        geofenceHelper = GeofenceHelper(context)
+
         binding.selectLocation.setOnClickListener {
             //            Navigate to another fragment to get the user location
             _viewModel.navigationCommand.value =
                 NavigationCommand.To(SaveReminderFragmentDirections.actionSaveReminderFragmentToSelectLocationFragment())
 
-            geofencingClient = LocationServices.getGeofencingClient(context!!)
-            geofenceHelper = GeofenceHelper(context)
         }
 
         binding.saveReminder.setOnClickListener {
