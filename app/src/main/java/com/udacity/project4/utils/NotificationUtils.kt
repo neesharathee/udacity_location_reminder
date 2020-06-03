@@ -46,6 +46,7 @@ fun sendNotification(context: Context, reminderDataItem: ReminderDataItem) {
         .setContentTitle(reminderDataItem.title)
         .setContentText(reminderDataItem.location)
         .setContentIntent(notificationPendingIntent)
+        .setPriority(NotificationCompat.PRIORITY_HIGH)
         .setAutoCancel(true)
         .build()
 

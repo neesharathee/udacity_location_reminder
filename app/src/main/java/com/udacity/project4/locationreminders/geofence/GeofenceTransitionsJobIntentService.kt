@@ -2,6 +2,7 @@ package com.udacity.project4.locationreminders.geofence
 
 import android.content.Context
 import android.content.Intent
+import android.text.TextUtils
 import android.util.Log
 import androidx.core.app.JobIntentService
 import com.google.android.gms.location.Geofence
@@ -52,6 +53,8 @@ class GeofenceTransitionsJobIntentService : JobIntentService(), CoroutineScope {
                 TAG,
                 "sendNotification: " + geofence.requestId
             )
+
+            if(TextUtils.isEmpty(requestId)) return;
 
 
             //Get the local repository instance
