@@ -39,14 +39,14 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
         when (transitionType) {
             Geofence.GEOFENCE_TRANSITION_ENTER -> {
                 enqueueWork(context, intent)
-                Toast.makeText(context, "GEOFENCE_TRANSITION_ENTER", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context, "GEOFENCE_TRANSITION_ENTER", Toast.LENGTH_SHORT).show()
             }
-            Geofence.GEOFENCE_TRANSITION_DWELL -> {
-                Toast.makeText(context, "GEOFENCE_TRANSITION_DWELL", Toast.LENGTH_SHORT).show()
-            }
-            Geofence.GEOFENCE_TRANSITION_EXIT -> {
-                Toast.makeText(context, "GEOFENCE_TRANSITION_EXIT", Toast.LENGTH_SHORT).show()
-            }
+//            Geofence.GEOFENCE_TRANSITION_DWELL -> {
+//                Toast.makeText(context, "GEOFENCE_TRANSITION_DWELL", Toast.LENGTH_SHORT).show()
+//            }
+//            Geofence.GEOFENCE_TRANSITION_EXIT -> {
+//                Toast.makeText(context, "GEOFENCE_TRANSITION_EXIT", Toast.LENGTH_SHORT).show()
+//            }
         }
 
     }
