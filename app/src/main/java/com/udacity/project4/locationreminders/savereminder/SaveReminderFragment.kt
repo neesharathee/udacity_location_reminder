@@ -3,6 +3,7 @@ package com.udacity.project4.locationreminders.savereminder
 import android.app.PendingIntent
 import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -78,7 +79,7 @@ class SaveReminderFragment : BaseFragment() {
 
          //   use the user entered reminder details to:
 //             1) add a geofencing request
-            if (latitude != null && longitude != null)
+            if (latitude != null && longitude != null && !TextUtils.isEmpty(title))
                 addGeofence(LatLng(latitude, longitude), GEOFENCE_RADIUS, geofenceId)
         }
     }

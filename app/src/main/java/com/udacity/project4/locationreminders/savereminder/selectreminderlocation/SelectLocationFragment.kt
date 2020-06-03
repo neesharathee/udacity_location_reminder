@@ -113,7 +113,7 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
     override fun onMapReady(p0: GoogleMap) {
 
         map = p0
-        map.moveCamera(CameraUpdateFactory.zoomIn())
+        //map.moveCamera(CameraUpdateFactory.zoomIn())
         setMapStyle(map)
         setPoiClick(map)
         enableMyLocation()
@@ -138,6 +138,7 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
                 REQUEST_LOCATION_PERMISSION
             )
         }
+        map.moveCamera(CameraUpdateFactory.zoomIn())
     }
 
     override fun onRequestPermissionsResult(

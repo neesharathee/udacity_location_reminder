@@ -3,6 +3,7 @@ package com.udacity.project4.locationreminders.savereminder
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.udacity.project4.locationreminders.data.ReminderDataSource
 import com.udacity.project4.locationreminders.getOrAwaitValue
 import com.udacity.project4.locationreminders.reminderslist.ReminderDataItem
 
@@ -13,6 +14,10 @@ import org.hamcrest.core.IsNot.not
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.androidx.viewmodel.ViewModelParameters
+import org.koin.core.context.GlobalContext.get
+import org.mockito.Mockito.mock
+import org.robolectric.Robolectric
 
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
@@ -26,11 +31,12 @@ class SaveReminderViewModelTest {
     @Test
     fun validateAndSaveReminder() {
 
+        //val rem : ReminderDataSource = mock(ReminderDataSource)
         // Given a fresh ViewModel
-       // val saveReminderViewModel = SaveReminderViewModel(ApplicationProvider.getApplicationContext())
+        val saveReminderViewModel = get()
 
         // When adding a new task
-       // saveReminderViewModel.validateAndSaveReminder()
+        //saveReminderViewModel.validateAndSaveReminder()
 
         // Then the new task event is triggered
         //val latvalue = saveReminderViewModel.latitude.value
