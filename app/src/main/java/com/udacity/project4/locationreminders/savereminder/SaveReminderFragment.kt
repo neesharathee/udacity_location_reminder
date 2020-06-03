@@ -32,7 +32,7 @@ class SaveReminderFragment : BaseFragment() {
     private lateinit var binding: FragmentSaveReminderBinding
     private lateinit var reminderData: ReminderDataItem
     private lateinit var geofenceHelper: GeofenceHelper
-    private val GEOFENCE_RADIUS = 200f
+    private val GEOFENCE_RADIUS = 500f
     lateinit var geofencingClient: GeofencingClient
 
     override fun onCreateView(
@@ -69,8 +69,7 @@ class SaveReminderFragment : BaseFragment() {
             val location = _viewModel.reminderSelectedLocationStr.value
             val latitude = _viewModel.latitude.value
             val longitude = _viewModel.longitude.value
-            reminderData =
-                ReminderDataItem(title, description, location, latitude, longitude, geofenceId)
+            reminderData = ReminderDataItem(title, description, location, latitude, longitude, geofenceId)
 
 
             _viewModel.validateAndSaveReminder(reminderData)
@@ -95,7 +94,7 @@ class SaveReminderFragment : BaseFragment() {
             Geofence.GEOFENCE_TRANSITION_ENTER or Geofence.GEOFENCE_TRANSITION_EXIT
         )
         val geofencingRequest: GeofencingRequest = geofenceHelper.getGeofencingRequest(geofence)
-        val pendingIntent: PendingIntent = geofenceHelper.getGeofencePendingIntent()!!
+        val pendingIntent: PendingIntent? = geofenceHelper.getGeofencePendingIntent()
         geofencingClient.addGeofences(geofencingRequest, pendingIntent)
             .addOnSuccessListener(OnSuccessListener<Void?> {
                 Toast.makeText(context, "Geofence Added...", Toast.LENGTH_SHORT).show()
@@ -106,7 +105,7 @@ class SaveReminderFragment : BaseFragment() {
             })
             .addOnFailureListener(OnFailureListener { e ->
                 val errorMessage: String = geofenceHelper.getErrorString(e)
-                Toast.makeText(context, "onFailure: $errorMessage", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Please give background location permission", Toast.LENGTH_LONG).show()
                 Log.d(
                     TAG,
                     "onFailure: $errorMessage"
