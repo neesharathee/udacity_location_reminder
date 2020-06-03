@@ -61,7 +61,7 @@ class GeofenceTransitionsJobIntentService : JobIntentService(), CoroutineScope {
                     return
     }
 }
-        if(TextUtils.isEmpty(requestId)) return;
+        if(TextUtils.isEmpty(requestId)) return
 
         repository = get()
 //        Interaction to the repository has to be through a coroutine scope
