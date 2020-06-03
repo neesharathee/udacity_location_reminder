@@ -74,8 +74,8 @@ class SaveReminderFragment : BaseFragment() {
 
 
             _viewModel.validateAndSaveReminder(reminderData)
-            _viewModel.navigationCommand.value =
-                NavigationCommand.To(SaveReminderFragmentDirections.actionSaveReminderFragmentToReminderListFragment())
+//            _viewModel.navigationCommand.value =
+//                NavigationCommand.To(SaveReminderFragmentDirections.actionSaveReminderFragmentToReminderListFragment())
 
          //   use the user entered reminder details to:
 //             1) add a geofencing request
@@ -98,7 +98,7 @@ class SaveReminderFragment : BaseFragment() {
         val pendingIntent: PendingIntent? = geofenceHelper.getGeofencePendingIntent()
         geofencingClient.addGeofences(geofencingRequest, pendingIntent)
             .addOnSuccessListener(OnSuccessListener<Void?> {
-                Toast.makeText(context, "Geofence Added...", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context, "Geofence Added...", Toast.LENGTH_SHORT).show()
                 Log.d(
                     TAG,
                     "onSuccess: Geofence Added..."
