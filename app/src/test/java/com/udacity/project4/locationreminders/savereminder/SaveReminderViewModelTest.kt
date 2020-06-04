@@ -3,51 +3,39 @@ package com.udacity.project4.locationreminders.savereminder
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.udacity.project4.locationreminders.data.ReminderDataSource
-import com.udacity.project4.locationreminders.getOrAwaitValue
-import com.udacity.project4.locationreminders.reminderslist.ReminderDataItem
-
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import org.hamcrest.CoreMatchers.nullValue
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.core.IsNot.not
+import com.udacity.project4.locationreminders.data.FakeDataSource
+import com.udacity.project4.locationreminders.data.dto.ReminderDTO
+import org.junit.Before
+import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.androidx.viewmodel.ViewModelParameters
-import org.koin.core.context.GlobalContext.get
-import org.mockito.Mockito.mock
-import org.robolectric.Robolectric
 
-@ExperimentalCoroutinesApi
+
 @RunWith(AndroidJUnit4::class)
 class SaveReminderViewModelTest {
+    @get:Rule val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    @get:Rule
-    var instantExecutorRule = InstantTaskExecutorRule()
+    private val reminder1 = ReminderDTO("Title1", "Description1","location1",0.53,0.6,"0")
+    private val reminder2 = ReminderDTO("Title2", "Description2","location2",0.53,0.6,"1")
+    private val reminder3 = ReminderDTO("Title3", "Description3","location3",0.53,0.6,"2")
+    private val remoteReminders = listOf(reminder1, reminder2,reminder3).sortedBy { it.id }
 
-    // Other code…
+    private lateinit var reminderDataSource: FakeDataSource
+    private lateinit var saveReminderViewModel: SaveReminderViewModel
 
-    @Test
-    fun validateAndSaveReminder() {
 
-        //val rem : ReminderDataSource = mock(ReminderDataSource)
-        // Given a fresh ViewModel
-        val saveReminderViewModel = get()
 
-        // When adding a new task
-        //saveReminderViewModel.validateAndSaveReminder()
+    @Before
+    fun createViewModel(){
+        reminderDataSource = FakeDataSource(remoteReminders.toMutableList())
+        saveReminderViewModel = SaveReminderViewModel(ApplicationProvider.getApplicationContext(),reminderDataSource)
 
-        // Then the new task event is triggered
-        //val latvalue = saveReminderViewModel.latitude.value
-//        val latvalue = saveReminderViewModel.latitude.value
-//
-//        val latvalue = saveReminderViewModel.latitude.value
-
-        //newTaskEvent.getOrAwaitValue()
-       // assertThat(latvalue, (not(nullValue()))
-      //  )
     }
 
+    @Test
+    fun onClear(){
+        saveReminderViewModel.onClear()
+    }
 
 }
